@@ -1,0 +1,16 @@
+img {
+    padding-left: 2vw;
+    padding-top: 1vw;
+    max-height: 68vw;
+    max-width: 94vw;
+
+}
+input {
+    margin-left: 3vw;
+    margin-top: 0.5vw;
+}
+button {margin-top: 1vw;
+    margin-left: 15vw;
+    border-radius: 90px;
+    min-width: 100px;
+}
