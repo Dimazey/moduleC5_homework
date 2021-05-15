@@ -1,0 +1,14 @@
+#result{display: flex;
+    flex-wrap: wrap;
+max-width: 90vw;
+padding-top: 2vw;
+}
+
+.card {display: float: left;
+max-width: 180px;
+margin-left: 20px;}
+
+.card-image {
+    max-width: 180px;
+}
+
