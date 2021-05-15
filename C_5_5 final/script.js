@@ -1,7 +1,6 @@
 const button = document.querySelector('button');
-const resultDiv = document.getElementById('result');
+const resultDiv = document.getElementById('resultDiv');
 const servError = 'Ошибка сервера. Попробуйте снова';
-
 
 function checkInput (value1, value2) {
     let result = 0;
@@ -29,12 +28,11 @@ const useRequest = (url) => {
             console.log(pictureLinks)
             return pictureLinks ;
         })
-        .catch(() => console.log(servError))
+        .catch(() => showErrorInput(servError))
 }
 
 function showErrorInput(error){
-      let resultDiv = document.getElementById('resultDiv');
-    resultDiv.innerHTML = error;
+      resultDiv.innerHTML = error;
 
 }
 function showResult (list) {
@@ -42,8 +40,6 @@ function showResult (list) {
     for (let link of list) {
         result += `<img src="${link}">`;
     }
-    console.log(result)
-        let resultDiv = document.getElementById('resultDiv');
     resultDiv.innerHTML = result;
 
 }
@@ -57,8 +53,17 @@ button.addEventListener("click", async () => {
     if (inputError) {showErrorInput(inputError)}
     else {let url = ` https://picsum.photos/v2/list?page=${pageNumber}&limit=${limit}`;
           const linksList = await useRequest(url);
-          console.log('pictureList:', linksList);
+          localStorage.setItem('linkslist', JSON.stringify(linksList));
           showResult(linksList);
         }
     });
 
+if (sessionStorage.getItem("is_reloaded")) {
+    window.onload = () => {
+        const saveLinks = JSON.parse(localStorage.getItem('linkslist'));
+        if (saveLinks) {
+            showResult(saveLinks)
+        }
+    };
+}
+sessionStorage.setItem("is_reloaded", true);
